@@ -1,38 +1,41 @@
+import Image from "next/image"
 import Link from "next/link"
+type Game = {
+  id: number,
+  background_image: string,
+  rating: number,
+  name: string 
+}
 
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+const getGames =async (): Promise<Game[]> => {
+  const res = await fetch (`https://api.rawg.io/api/games?key=${process.env.RAWG}`)
+  if(!res.ok){
+    throw new Error("failed to fetch")
+  }
+  await new Promise((resolve) =>setTimeout(resolve, 2000))
+  const data = await res.json()
+  return data.results
+}
 
-export default function IndexPage() {
+
+export default async function IndexPage() {
+  const games = await getGames()
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-         Odds Are <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          odds are application idea.
-        </p>
-      </div>
-      <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Documentation
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
-      </div>
-    </section>
+   <main className="m-24 rounded-md grid grid-cols-4 gap-12">
+    {games.map((game) => (
+      <div className="col-span-4 md: col-span-2" key={game.id}>
+        <h1>{game.name}</h1>
+        <p>{game.rating}</p>
+        <div className="aspect-video relative">
+        <Image
+          src={game.background_image}
+          fill
+          className="object-cover rounded-md"
+          alt={game.name}
+          />
+          </div>
+          </div>
+    ))}
+   </main>
   )
 }
