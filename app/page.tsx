@@ -1,12 +1,17 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
+import { createClient } from '@supabase/supabase-js'
 type Game = {
   id: number,
   background_image: string,
   rating: number,
   name: string 
 }
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient(`${process.env.SUPABASE_URL}`,`${process.env.SUPABASE_ANON}`)
+
 
 const getGames =async (): Promise<Game[]> => {
   const res = await fetch (`https://api.rawg.io/api/games?key=${process.env.RAWG}`)
@@ -24,7 +29,7 @@ export default async function IndexPage() {
   return (
    <main className="m-24 rounded-md grid grid-cols-4 gap-12">
     {games.map((game) => (
-      <div className="col-span-4 md: col-span-2" key={game.id}>
+      <div className="col-span-4 md:" key={game.id}>
         <h1>{game.name}</h1>
         <p>{game.rating}</p>
         <div className="aspect-video relative">
