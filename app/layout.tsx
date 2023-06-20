@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import { createClient } from "@supabase/supabase-js"
 
 export const metadata: Metadata = {
   title: {
@@ -28,6 +29,8 @@ export const metadata: Metadata = {
 interface RootLayoutProps {
   children: React.ReactNode
 }
+
+//const supabase = createClient(`${process.env.SUPABASE_URL}`,`${process.env.SUPABASE_ANON}`)
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (

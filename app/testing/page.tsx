@@ -45,7 +45,9 @@ export default async function Testing() {
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <h1>Thomas Lawless</h1>
+            <br></br>
+            <br></br>
+            <h1> @tom</h1>
         </CardFooter>
           </Card>
         
