@@ -31,6 +31,7 @@ interface RootLayoutProps {
 }
 
 //const supabase = createClient(`${process.env.SUPABASE_URL}`,`${process.env.SUPABASE_ANON}`)
+import AuthForm from '../components/auth-form'
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
