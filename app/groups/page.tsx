@@ -3,13 +3,18 @@ import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/com
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-
+import Link from "next/link";
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
 
   const { data: groups } = await supabase.from("groups").select();
 
   return (
+    <div>
+      <Link href="/groups/create">
+        <Button>New Group</Button>
+      </Link>
+
     <main className="m-24 rounded-md grid grid-cols-1 gap-12">
       {groups?.map((groups) => (
         <Card className="col-span-1" key={groups.id}>
@@ -28,12 +33,14 @@ export default async function Index() {
                 <AvatarImage src="https://github.com/shadcn.png" />
             </Avatar>
             <h1>Created by @tom</h1>
-            
-            <Button className="px-5">Join</Button>
+            <Link href="groups/1">
+              <Button className="px-5">Join</Button>
+            </Link>
             
         </CardFooter>
         </Card>
       ))}
       </main>
+      </div>
   );
 }

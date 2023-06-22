@@ -1,9 +1,23 @@
-import React from 'react'
-
-const page = () => {
+export default function Page() {
   return (
-    <div>page</div>
+    <div>
+      <table>
+  <tr>
+    <th>Bet</th>
+    <th>Odds</th>
+    <th>User</th>
+  </tr>
+  <tr>
+    <td>Bet 1</td>
+    <td>+100</td>
+    <td>@tom</td>
+  </tr>
+  <tr>
+    <td>Bet 2</td>
+    <td>+200</td>
+    <td>@john</td>
+  </tr>
+</table>
+    </div>
   )
 }
-
-export default page
